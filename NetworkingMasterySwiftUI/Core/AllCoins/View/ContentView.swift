@@ -13,7 +13,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("\(vm.coin): \(vm.price)")
+            if let errorMessage = vm.errorMessage {
+                Text(errorMessage)
+            } else {
+                Text("\(vm.coin): \(vm.price)")
+            }
         }
         .padding()
     }
