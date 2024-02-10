@@ -16,10 +16,16 @@ class CoinsViewModel: ObservableObject {
     
     init() {
 //        fetchPrice(coin: "bitcoin")
-        fetchCoins()
+        Task {
+            try await fetchCoins()
+        }
     }
     
-    func fetchCoins() {
+    func fetchCoins() async throws {
+            self.coins = try await service.fetchCoins()
+    }
+    
+    func fetchCoinsWithCompletionHandler() {
         
         service.fetchCoinsWithResult { [weak self] result in
             DispatchQueue.main.async {
