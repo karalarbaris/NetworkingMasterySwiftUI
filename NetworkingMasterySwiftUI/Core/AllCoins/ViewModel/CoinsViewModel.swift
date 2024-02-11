@@ -17,12 +17,18 @@ class CoinsViewModel: ObservableObject {
     init() {
 //        fetchPrice(coin: "bitcoin")
         Task {
-            try await fetchCoins()
+            await fetchCoins()
         }
     }
     
-    func fetchCoins() async throws {
+    @MainActor
+    func fetchCoins() async {
+        do {
             self.coins = try await service.fetchCoins()
+        } catch {
+            guard let error = error as? CoinAPIError else { return }
+            self.errorMessage = error.customDescription
+        }
     }
     
     func fetchCoinsWithCompletionHandler() {
