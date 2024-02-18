@@ -18,7 +18,22 @@ struct CoinDetailsView: View {
     }
     
     var body: some View {
-        Text(coin.name)
+        if let details = vm.coinDetails {
+            VStack(alignment: .leading) {
+                Text(details.name)
+                    .fontWeight(.semibold)
+                    .font(.subheadline)
+                
+                Text(details.symbol)
+                    .font(.footnote)
+                
+                Text(details.description.text)
+                    .font(.footnote)
+                    .padding(.vertical)
+//                Spacer()
+            }
+            .padding()
+        }
     }
 }
 

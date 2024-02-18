@@ -11,6 +11,8 @@ class CoinDetailsViewModel: ObservableObject {
     private let service = CoinDataService()
     private let coinId: String
     
+    @Published var coinDetails: CoinDetails?
+    
     init(coinId: String) {
         self.coinId = coinId
         
@@ -19,10 +21,11 @@ class CoinDetailsViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func fetchCoinDetails() async {
         do {
-            let details = try await service.fetchCoinDetails(id: coinId)
-            print("DEBUG: Details: \(details) ")
+            self.coinDetails = try await service.fetchCoinDetails(id: coinId)
+            print("DEBUG: Details: \(String(describing: self.coinDetails)) ")
         } catch {
             print("DEBUG: Error \(error.localizedDescription)")
         }
