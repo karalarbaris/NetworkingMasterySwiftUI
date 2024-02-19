@@ -7,54 +7,46 @@
 
 import Foundation
 
-class CoinDataService {
+protocol HTTPDataDownloader {
+    func fetchData<T: Decodable>(as type: T.Type, endpoint: String) async throws -> T
+}
+
+extension HTTPDataDownloader {
+    func fetchData<T: Decodable>(as type: T.Type, endpoint: String) async throws -> T {
+        guard let url = URL(string: endpoint) else {
+            throw CoinAPIError.requestFailed(description: "Invalid URL")
+        }
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw CoinAPIError.requestFailed(description: "Bad HTTP response")
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            throw CoinAPIError.invalidStatusCode(statusCode: httpResponse.statusCode)
+        }
+        
+        do {
+            return try JSONDecoder().decode(type, from: data)
+        } catch {
+            throw error as? CoinAPIError ?? .unknownError(error: error)
+        }
+    }
+}
+
+class CoinDataService: HTTPDataDownloader {
     
     private let urlString = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=false&price_change_percentage=24h&locale=en"
     
     func fetchCoins() async throws -> [Coin] {
-        guard let url = URL(string: urlString) else { return [] }
-
-        let (data, response) = try await URLSession.shared.data(from: url)
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw CoinAPIError.requestFailed(description: "Bad HTTP response")
-        }
-        
-        guard httpResponse.statusCode == 200 else {
-            throw CoinAPIError.invalidStatusCode(statusCode: httpResponse.statusCode)
-        }
-        
-        do {
-            let coins = try JSONDecoder().decode([Coin].self, from: data)
-            return coins
-        } catch {
-            throw error as? CoinAPIError ?? .unknownError(error: error)
-        }
+        return try await fetchData(as: [Coin].self, endpoint: urlString)
     }
     
     func fetchCoinDetails(id: String) async throws -> CoinDetails? {
         let detailsUrlString = "https://api.coingecko.com/api/v3/coins/\(id)?localization=false"
-        
-        guard let url = URL(string: detailsUrlString) else { return nil }
-
-        let (data, response) = try await URLSession.shared.data(from: url)
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw CoinAPIError.requestFailed(description: "Bad HTTP response")
-        }
-        
-        guard httpResponse.statusCode == 200 else {
-            throw CoinAPIError.invalidStatusCode(statusCode: httpResponse.statusCode)
-        }
-        
-        do {
-            let coindetail = try JSONDecoder().decode(CoinDetails.self, from: data)
-            return coindetail
-        } catch {
-            throw error as? CoinAPIError ?? .unknownError(error: error)
-        }
+        return try await fetchData(as: CoinDetails.self, endpoint: detailsUrlString)
     }
-    
     
 }
 
