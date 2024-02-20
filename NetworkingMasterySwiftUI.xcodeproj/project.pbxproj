@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B95A3E482B849C8900B7110F /* HTTPDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95A3E472B849C8900B7110F /* HTTPDataDownloader.swift */; };
 		B9967DB52B74C7A000CA555A /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9967DB42B74C7A000CA555A /* Coin.swift */; };
 		B9967DB72B75215C00CA555A /* CoinAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9967DB62B75215C00CA555A /* CoinAPIError.swift */; };
 		B9A1982D2B717DB00030D6A2 /* CoinsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1982C2B717DB00030D6A2 /* CoinsViewModel.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B95A3E472B849C8900B7110F /* HTTPDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPDataDownloader.swift; sourceTree = "<group>"; };
 		B9967DB42B74C7A000CA555A /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		B9967DB62B75215C00CA555A /* CoinAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAPIError.swift; sourceTree = "<group>"; };
 		B9A1982C2B717DB00030D6A2 /* CoinsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsViewModel.swift; sourceTree = "<group>"; };
@@ -46,6 +48,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B95A3E452B849C6800B7110F /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B95A3E462B849C7700B7110F /* API */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B95A3E462B849C7700B7110F /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B95A3E472B849C8900B7110F /* HTTPDataDownloader.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		B9D126002B46E3D600C70E0E = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +83,7 @@
 		B9D1260B2B46E3D600C70E0E /* NetworkingMasterySwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				B95A3E452B849C6800B7110F /* Shared */,
 				B9D1261A2B46E3F300C70E0E /* App */,
 				B9D1261B2B46E40000C70E0E /* Core */,
 				B9D126102B46E3D700C70E0E /* Assets.xcassets */,
@@ -250,6 +269,7 @@
 				B9D3D7E52B7B3C0600ED3418 /* CoinDetailsViewModel.swift in Sources */,
 				B9967DB72B75215C00CA555A /* CoinAPIError.swift in Sources */,
 				B9DF2E172B73AD4200ECF158 /* CoinDataService.swift in Sources */,
+				B95A3E482B849C8900B7110F /* HTTPDataDownloader.swift in Sources */,
 				B9D3D7E22B7B3A8D00ED3418 /* CoinDetails.swift in Sources */,
 				B9D1260F2B46E3D600C70E0E /* ContentView.swift in Sources */,
 				B9A1982D2B717DB00030D6A2 /* CoinsViewModel.swift in Sources */,
