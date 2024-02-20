@@ -19,11 +19,19 @@ class CoinDataService: HTTPDataDownloader {
     }
     
     func fetchCoinDetails(id: String) async throws -> CoinDetails? {
+        if let cached = CoinDetailsCache.shared.get(forkey: id) {
+            print("DEBUG: Got details from cache")
+            return cached
+        }
         guard let endpoint = coinDetailsURLString(id: id) else {
             throw CoinAPIError.requestFailed(description: "Invalid endpoint")
         }
         //        let detailsUrlString = "https://api.coingecko.com/api/v3/coins/\(id)?localization=false"
-        return try await fetchData(as: CoinDetails.self, endpoint: endpoint)
+        
+        print("DEBUG: Got details from API")
+        let coinDetails = try await fetchData(as: CoinDetails.self, endpoint: endpoint)
+        CoinDetailsCache.shared.set(coinDetails, forkey: id)
+        return coinDetails
     }
     
     private var baseURLComponents: URLComponents {
