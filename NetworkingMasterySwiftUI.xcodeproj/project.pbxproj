@@ -159,9 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				B9E662B22B854DF5002A0CDD /* Cache */,
-				B9D3D7E32B7B3BE800ED3418 /* ViewModel */,
 				B9D3D7E02B7B3A7D00ED3418 /* Model */,
 				B9D3D7DD2B7B389600ED3418 /* View */,
+				B9D3D7E32B7B3BE800ED3418 /* ViewModel */,
 			);
 			path = CoinDetails;
 			sourceTree = "<group>";
