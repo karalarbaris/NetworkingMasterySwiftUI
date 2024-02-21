@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct CoinDetailsView: View {
-    
     let coin: Coin
     @ObservedObject var vm: CoinDetailsViewModel
     
-    init(coin: Coin) {
+    init(coin: Coin,service: CoinDataService) {
         self.coin = coin
-        self.vm = CoinDetailsViewModel(coinId: coin.id)
+        self.vm = CoinDetailsViewModel(service: service, coinId: coin.id)
     }
     
     var body: some View {
