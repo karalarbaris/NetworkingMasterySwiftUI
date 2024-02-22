@@ -11,7 +11,7 @@ struct CoinDetailsView: View {
     let coin: Coin
     @ObservedObject var vm: CoinDetailsViewModel
     
-    init(coin: Coin,service: CoinDataService) {
+    init(coin: Coin,service: CoinServiceProtocol) {
         self.coin = coin
         self.vm = CoinDetailsViewModel(service: service, coinId: coin.id)
     }
