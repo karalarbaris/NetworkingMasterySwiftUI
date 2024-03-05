@@ -586,3 +586,70 @@ let mockCoinData_marketCapDesc: Data = """
 ]
 
 """.data(using: .utf8)!
+
+// Invalid name key in bitcoin
+let mockCoins_invalidJSON = """
+[
+  {
+    "id": "bitcoin",
+    "symbol": "btc",
+    "asdfasdf": "Bitcoin",
+    "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+    "current_price": 51232,
+    "market_cap": 1002329524088,
+    "market_cap_rank": 1,
+    "fully_diluted_valuation": 1072031042613,
+    "total_volume": 29110934053,
+    "high_24h": 51992,
+    "low_24h": 50706,
+    "price_change_24h": 181.67,
+    "price_change_percentage_24h": 0.35586,
+    "market_cap_change_24h": 2419493922,
+    "market_cap_change_percentage_24h": 0.24197,
+    "circulating_supply": 19634618,
+    "total_supply": 21000000,
+    "max_supply": 21000000,
+    "ath": 69045,
+    "ath_change_percentage": -26.01977,
+    "ath_date": "2021-11-10T14:24:11.849Z",
+    "atl": 67.81,
+    "atl_change_percentage": 75228.46499,
+    "atl_date": "2013-07-06T00:00:00.000Z",
+    "roi": null,
+    "last_updated": "2024-02-22T14:38:02.705Z"
+  },
+  {
+    "id": "ethereum",
+    "symbol": "eth",
+    "name": "Ethereum",
+    "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+    "current_price": 2955.02,
+    "market_cap": 353814868754,
+    "market_cap_rank": 2,
+    "fully_diluted_valuation": 353814868754,
+    "total_volume": 21212362058,
+    "high_24h": 3028.6,
+    "low_24h": 2887.05,
+    "price_change_24h": 63.89,
+    "price_change_percentage_24h": 2.20969,
+    "market_cap_change_24h": 7185221137,
+    "market_cap_change_percentage_24h": 2.07288,
+    "circulating_supply": 120161069.932519,
+    "total_supply": 120161069.932519,
+    "max_supply": null,
+    "ath": 4878.26,
+    "ath_change_percentage": -39.61951,
+    "ath_date": "2021-11-10T14:24:19.604Z",
+    "atl": 0.432979,
+    "atl_change_percentage": 680191.27192,
+    "atl_date": "2015-10-20T00:00:00.000Z",
+    "roi": {
+      "times": 76.14908243926365,
+      "currency": "btc",
+      "percentage": 7614.908243926366
+    },
+    "last_updated": "2024-02-22T14:38:03.240Z"
+  }
+]
+""".data(using: .utf8)!
+
