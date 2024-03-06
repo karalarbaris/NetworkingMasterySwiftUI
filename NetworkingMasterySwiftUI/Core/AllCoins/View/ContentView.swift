@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ContentView: View {
     private let service: CoinServiceProtocol
@@ -25,14 +26,10 @@ struct ContentView: View {
                             Text("\(coin.marketCapRank)")
                                 .foregroundStyle(Color.gray)
                             
-                            AsyncImage(url: URL(string: coin.image)) { image in
-                                image
-                                    .resizable()
-                                    .frame(width: 32, height: 32)
-                            } placeholder: {
-                                EmptyView()
-                            }
-
+                            KFImage(URL(string: coin.image))
+                                .resizable()
+                                .frame(width: 32, height: 32)
+         
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(coin.name)
                                     .fontWeight(.semibold)

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CoinDetailsView: View {
     let coin: Coin
@@ -19,12 +20,22 @@ struct CoinDetailsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if let details = vm.coinDetails {
-                Text(details.name)
-                    .fontWeight(.semibold)
-                    .font(.subheadline)
-                
-                Text(details.symbol)
-                    .font(.footnote)
+                HStack {
+                    VStack {
+                        Text(details.name)
+                            .fontWeight(.semibold)
+                            .font(.subheadline)
+                        
+                        Text(details.symbol)
+                            .font(.footnote)
+                    }
+                    
+                    Spacer()
+                    
+                    KFImage(URL(string: coin.image))
+                        .resizable()
+                        .frame(width: 64, height: 64)
+                }
                 
                 Text(details.description.text)
                     .font(.footnote)
