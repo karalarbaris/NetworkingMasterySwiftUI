@@ -31,6 +31,13 @@ struct ContentView: View {
                                     
                             }
                         }
+                        .onAppear {
+                            if coin == vm.coins.last {
+                                Task {
+                                    await vm.fetchCoins()                                    
+                                }
+                            }
+                        }
                         .font(.footnote)
                     }
                 }

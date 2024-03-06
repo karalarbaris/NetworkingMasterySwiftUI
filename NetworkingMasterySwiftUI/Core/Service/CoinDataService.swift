@@ -14,12 +14,16 @@ protocol CoinServiceProtocol {
 
 class CoinDataService: CoinServiceProtocol, HTTPDataDownloader {
     
+    var page = 0
+    let fetchLimit = 25
+    
     init() {
         print("DEBUG: Did init service")
     }
     //    private let urlString = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=false&price_change_percentage=24h&locale=en"
     
     func fetchCoins() async throws -> [Coin] {
+        page += 1
         guard let endpoint = allCoinsURLString else {
             throw CoinAPIError.requestFailed(description: "Invalid endpoint")
         }
@@ -57,8 +61,8 @@ class CoinDataService: CoinServiceProtocol, HTTPDataDownloader {
         components.queryItems = [
             .init(name: "vs_currency", value: "usd"),
             .init(name: "order", value: "market_cap_desc"),
-            .init(name: "per_page", value: "25"),
-            .init(name: "page", value: "1"),
+            .init(name: "per_page", value: "\(fetchLimit)"),
+            .init(name: "page", value: "\(page)"),
             .init(name: "sparkline", value: "false"),
             .init(name: "price_change_percentage", value: "24h"),
             .init(name: "locale", value: "en")
